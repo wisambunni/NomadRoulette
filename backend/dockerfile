@@ -1,0 +1,28 @@
+# Stage 1: Build the application
+FROM gradle:jdk21 AS build
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the Gradle wrapper and build files first to cache dependencies
+COPY build.gradle settings.gradle /app/
+COPY gradle /app/gradle
+
+# Download dependencies
+RUN gradle dependencies --no-daemon
+
+# Copy the actual source code
+COPY src /app/src
+
+# Build the project (creates the jar file in build/libs/)
+RUN gradle clean bootJar --no-daemon
+
+# Stage 2: Create the runtime
+FROM eclipse-temurin:21-jre-alpine AS runtime
+WORKDIR /app
+
+# Copy the built jar from the 'build' stage
+COPY --from=build /app/build/libs/nomad-roulette-0.0.1-SNAPSHOT.jar app.jar
+
+# This container's default action is to run the Spring Boot app
+ENTRYPOINT ["java", "-jar", "app.jar"]

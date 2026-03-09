@@ -47,3 +47,6 @@ cdk/cdk.out/
 .idea/
 .vscode/
 *.iml
+
+# LocalStack Persistent Data
+volume/
