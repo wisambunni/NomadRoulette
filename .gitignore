@@ -35,6 +35,7 @@ Thumbs.db
 # Gradle
 .gradle/
 backend/build/
+backend/bin/
 !backend/gradle/wrapper/gradle-wrapper.jar
 !backend/gradlew
 !backend/gradlew.bat
