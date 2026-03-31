@@ -1,5 +1,6 @@
 import { Construct } from 'constructs';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as cdk from 'aws-cdk-lib';
 import { LambdaHandlerNames } from '../../resources/constants/constants';
 
 export interface GenerateItineraryLambdaProps {
@@ -16,8 +17,10 @@ export class GenerateItineraryLambda extends Construct {
           code: lambda.Code.fromAsset('../backend/build/libs/nomad-roulette-0.0.1-SNAPSHOT-aws.jar'),
           environment:
             {
-              'JAVA_TOOL_OPTIONS': '-XX:+TieredCompilation -XX:TieredStopAtLevel=1'
-            }
+              'JAVA_TOOL_OPTIONS': '-XX:+TieredCompilation -XX:TieredStopAtLevel=1',
+              'SERPAPI_API_KEY': process.env.SERPAPI_API_KEY ?? '',
+            },
+          timeout: cdk.Duration.seconds(30),
         })
     }
 }

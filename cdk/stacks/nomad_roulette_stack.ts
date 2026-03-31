@@ -14,5 +14,6 @@ export class NomadRouletteStack extends cdk.Stack {
     });
 
     gateway.AddRoute('itineraries', 'POST', generateItinieraryLamda.function);
+    gateway.AddRoute('destinations', 'POST', generateItinieraryLamda.function);
   }
 }

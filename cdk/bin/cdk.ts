@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 import * as cdk from 'aws-cdk-lib/core';
+import * as dotenv from 'dotenv';
 import { NomadRouletteStack } from '../stacks/nomad_roulette_stack';
+
+dotenv.config();
 
 const app = new cdk.App();
 new NomadRouletteStack(app, 'NomadRouletteStack', {

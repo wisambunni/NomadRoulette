@@ -5,7 +5,7 @@ Build backend
 docker-compose build backend
 
 Compile a Spring Boot jar
-docker run --rm -v "$(pwd)/backend:/app" -w /app gradle:jdk21 gradle clean bootJar --no-daemon
+docker run --rm -v "$(pwd)/backend:/app" -w /app gradle:jdk21 gradle clean shadowJar --no-daemon
 
 
 Spin up localstack
@@ -16,6 +16,18 @@ cd cdk
 > ./deploy.sh
 
 Test API
+
+Get destinations within budget (returns list of swipeable destinations)
+curl -X POST https://{api-id}.execute-api.localhost.localstack.cloud:4566/prod/destinations \
+  -H "Content-Type: application/json" \
+  -d '{
+    "originAirport": "LAX",
+    "startDate": "2026-05-01",
+    "endDate": "2026-05-14",
+    "budget": 3500
+  }'
+
+Generate itinerary for a chosen destination
 curl -X POST https://{api-id}.execute-api.localhost.localstack.cloud:4566/prod/itineraries \
   -H "Content-Type: application/json" \
   -d '{

@@ -51,3 +51,22 @@ cdk/cdk.out/
 
 # LocalStack Persistent Data
 volume/
+
+# Secrets & environment variables
+.env
+.env.*
+*-local.properties
+application-local.properties
+application-secrets.properties
+
+# AWS credentials
+.aws/
+aws-exports.js
+
+# CDK
+cdk/*.js
+cdk/*.d.ts
+!cdk/jest.config.js
+
+# Test reports
+backend/src/test/resources/application-test.properties

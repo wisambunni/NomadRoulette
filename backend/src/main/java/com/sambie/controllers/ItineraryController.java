@@ -2,13 +2,12 @@ package com.sambie.controllers;
 
 import com.sambie.models.ItineraryResponse;
 import com.sambie.models.ItineraryRequest;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class GenerateItineraryController {
+public class ItineraryController {
 
   @PostMapping("/itineraries")
   public ItineraryResponse generateSurpriseItinerary(@RequestBody ItineraryRequest request) {
